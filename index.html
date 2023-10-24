@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Embotelladora Thomsom</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" type="text/css" href="style.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+  <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+</head>
+<body>
+  <div class="container">
+    <div class="row px-3">
+      <div class="col-lg-10 col-xl-9 card flex-row mx-auto px-0">
+        <div class="img-left d-none d-md-flex"></div>
+
+        <div class="card-body">
+          <h4 class="title text-center mt-4">
+            Bienvenido/A
+          </h4>
+          <div class="resultado" id="resultado"></div>
+          <form class="form-box px-3" method="post">
+            <div class="form-input">
+              <span><i class="fa fa-user-o"></i></span>
+              <input type="text" name="Usuario" placeholder="USUARIO" tabindex="10" id="Usuario1" required>
+            </div>
+            <div class="form-input">
+              <span><i class="fa fa-key"></i></span>
+              <input type="password" name="Clave" placeholder="CLAVE" id="Clave1" required>
+            </div>
+
+            <div class="mb-3">
+              <div class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input" id="cb1" name="">
+                <label class="custom-control-label" for="cb1">Recuerdame</label>
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <button  type="submit" id="btn-login" class="btn btn-block text-uppercase" onclick="login_User();">INICIO</button>
+            </div>
+
+
+            <hr class="my-4">
+
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+<script>
+  function login_User(){
+    var Usuario1 = document.getElementById("Usuario1").value;
+    var Clave1 = document.getElementById("Clave1").value;
+
+    if (!Usuario1 == " " && !Clave1 == " "){
+        var parametros = {
+            "Usuario": Usuario1,
+            "Clave": Clave1};
+        $.ajax({
+            url: "login.php",
+            type: "POST",
+            data: parametros,
+            beforeSend: function(){$("#resultado").html("Procesando, espere por favor...");},
+            success: function(response) {
+                if (response!=2 && response!=0){$("#resultado").html("El usuario es: "+ response);}
+                else{window.location.href = 'menu.html'}
+            }
+            })
+    }
+  }
+</script>
+</html>

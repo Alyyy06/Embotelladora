@@ -1,0 +1,12 @@
+body{
+  height: 100vh;
+  background:radial-gradient(circle, rgba(224,17,255,1) 14%, rgba(179,254,245,1) 100%) !important;
+  display: block;
+  flex-direction: column;
+  align-items: left;
+  justify-content: center;
+  border-color: #af0049;
+}
+
+
+

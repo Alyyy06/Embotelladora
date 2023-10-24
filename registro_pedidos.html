@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="styleMenu.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <title>Registro de pedidos</title>
+</head>
+<body>
+    <div class="container">
+        <div class="row px-3">
+          <div class="col-lg-10 col-xl-9 card flex-row mx-auto px-0">
+    
+            <div class="card-body">
+              <h4 class="title text-center mt-4">
+                REGISTRAR PEDIDOS!
+              </h4>
+              <div class="resultado" id="resultado"></div>
+              <form class="form-box px-3">
+
+                <div class="form-input">
+                  <input type="text" name="Clave" placeholder="rif" id="rif" required>
+                </div>
+
+                <div class="form-input">
+                    <input type="text" name="Usuario" placeholder="Cantidad" tabindex="10" id="Cantidad" required>
+                </div>
+    
+                <div class="mb-3">
+                  <button type="submit" id="btn-login" class="btn btn-block text-uppercase" onclick="registropedido();">REGISTRAR</button>
+                </div>
+                
+                <a href="menu.html" class="btn btn-danger">Volver</a>
+                <a href="tabla_pedidos.html" class="btn btn-success">Ver pedidos</a>
+    
+                <hr class="my-4">
+    
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+</body>
+<script>
+    function registropedido(){
+        var rif = document.getElementById("rif").value;
+        var cantidad = document.getElementById("Cantidad").value;
+        alert("hioli")
+        if (!cantidad==" " && !rif==" "){
+            var parametros = {
+                "rif": rif,
+                "Cantidad": cantidad
+            };
+            alert("ya entre")
+            $.ajax({
+                url: "registro_pedidos.php",
+                type: "POST",
+                data: parametros,
+                beforeSend: function(){$("#resultado").html("Procesando, espere por favor...");},
+                success: function(response) {
+                    if (response){$("#resultado").html(response);
+                        alert("pendiente")}
+                    else{$("#resultado").html(response);}
+                }
+                })
+        }else{alert("Debe rellenar todos los campos")}
+    }
+</script>
+</html>
